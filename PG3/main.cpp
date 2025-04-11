@@ -5,7 +5,7 @@
 /// </summary>
 /// <param name="a"> 値a </param>
 /// <param name="b"> 値b </param>
-/// <returns></returns>
+/// <returns>小さい値</returns>
 template<typename T1,typename T2>
 T1 Min(T1 a, T2 b)
 {
