@@ -1,12 +1,10 @@
 #include <stdio.h>
 
 /// <summary>
-/// 
+/// 二つの値のうち小さい方を返す
 /// </summary>
-/// <typeparam name="T1"></typeparam>
-/// <typeparam name="T2"></typeparam>
-/// <param name="a"></param>
-/// <param name="b"></param>
+/// <param name="a"> 値a </param>
+/// <param name="b"> 値b </param>
 /// <returns></returns>
 template<typename T1,typename T2>
 T1 Min(T1 a, T2 b)
