@@ -25,9 +25,9 @@ char Min<char, char>(char a, char b)
 
 int main()
 {
-	printf("%d\n", Min(1, 2));
-	printf("%f\n", Min(5.33f, 2.5f));
-	printf("%lf\n", Min(5.4534, 8.432));
+	printf("%d\n", Min<int,int>(1, 2));
+	printf("%f\n", Min<float, float>(5.33f, 2.5f));
+	printf("%lf\n", Min<double, double>(5.4534, 8.432));
 	Min('a', 'b');
 
     return 0;
