@@ -12,6 +12,8 @@ T1 Min(T1 a, T2 b)
 	return static_cast<T1>(a < b) ? a : b;
 }
 
+/// <summary>
+/// charの型にメッセージを表示する
 template<>
 char Min<char, char>(char a, char b)
 {
