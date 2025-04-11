@@ -1,5 +1,13 @@
 #include <stdio.h>
 
+/// <summary>
+/// 
+/// </summary>
+/// <typeparam name="T1"></typeparam>
+/// <typeparam name="T2"></typeparam>
+/// <param name="a"></param>
+/// <param name="b"></param>
+/// <returns></returns>
 template<typename T1,typename T2>
 T1 Min(T1 a, T2 b)
 {
@@ -12,6 +20,8 @@ char Min<char, char>(char a, char b)
 	printf("数字以外は代入できません");
 	return 0;
 }
+
+
 
 int main()
 {
