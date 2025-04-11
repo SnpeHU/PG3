@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+/// <summary>
+/// 再帰的の場合、給料を計算する
+/// </summary>
+/// <param name="hours"> 働き時間</param>
+/// <returns>もらえるお金</returns>
 int Money(int hours)
 {
 	if (hours <= 1)
@@ -10,6 +15,7 @@ int Money(int hours)
 
 }
 
+/// 一般的と再帰的の給料の比較
 void Compare(int hours)
 {
 	for (int i = 1; i < hours; i++)
