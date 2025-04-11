@@ -3,15 +3,15 @@
 /// <summary>
 /// 再帰的の場合、給料を計算する
 /// </summary>
-/// <param name="hours"> 働き時間</param>
-/// <returns>もらえるお金</returns>
+/// <param name="hours">働き時間</param>
+/// <returns>時給</returns>
 int Money(int hours)
 {
 	if (hours <= 1)
 	{
 		return 100;
 	}
-	return Money(hours - 1) * 2 - 50 + Money(hours - 1);
+	return Money(hours - 1) * 2 -50;
 
 }
 
@@ -22,7 +22,14 @@ void Compare(int hours)
 	{
 		printf("時間: %d\n", i);
 		printf("一般的: %d\n", i * 1072);
-		printf("再帰的: %d\n", Money(i));
+
+		// 再帰的な計算
+		int money = 0;
+		for (int j = 1; j <= i; j++)
+		{
+			money += Money(j);
+		}
+		printf("再帰的: %d\n", money);
 
 	}
 }
@@ -30,7 +37,7 @@ void Compare(int hours)
 int main()
 {
 	int hours;
-	Compare(9);
+	Compare(10);
 	
 	return 0;
 }
