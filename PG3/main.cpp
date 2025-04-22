@@ -1,8 +1,7 @@
 #include <stdio.h>  
 #include <stdlib.h>  
 #include <windows.h>
-
-typedef void (*PFunc)(bool);
+#include <functional>
 
 // ランダムで1~6の数字を返す  
 int random()  
@@ -33,27 +32,25 @@ bool check(int num, int ans)
 } 
 
 // 結果を表示する
-void showResult(bool result)
-{
-if (result)
-{
-	printf("当たり\n");
-}
-else
-{
-	printf("違う\n");
-}
-}
+std::function <void(bool)> showResult = [](bool result) {
+	if (result)
+	{
+		printf("当たり\n");
+	}
+	else
+	{
+		printf("違う\n");
+	}
+	};
 
-void setTimeout(PFunc func, bool result)
+void setTimeout(std::function <void(bool)> ontimeout, bool result,int second)
 {
-    Sleep(3 * 1000);
-    func(result);
+    Sleep(second * 1000);
+    ontimeout(result);
 }
 
 int main()  
 {  
-   PFunc pShow = showResult;
 
   while (1)  
   {  
@@ -63,7 +60,7 @@ int main()
       int ans;  
       scanf_s("%d", &ans);  
    bool result = check(num, ans);
-   setTimeout(pShow, result);
+   setTimeout(showResult, result,3);
    printf("サイコロの目は%dです.\n", num);
 
 
