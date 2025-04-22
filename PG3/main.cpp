@@ -1,8 +1,73 @@
-#include <stdio.h>
-#include <iostream>
-int main()
-{
-    printf("好き\n");
-    return 0;
+#include <stdio.h>  
+#include <stdlib.h>  
+#include <windows.h>
 
+typedef void (*PFunc)(bool);
+
+// ランダムで1~6の数字を返す  
+int random()  
+{  
+  return rand() % 6 + 1;  
+}  
+
+/// <summary>
+/// サイコロの目が偶数か奇数かを判定
+/// </summary>
+/// <param name="num">サイコロを振るの結果</param>
+/// <param name="ans">当てる数字</param>
+/// <returns></returns>
+bool check(int num, int ans)  
+{  
+  if (num % 2 == 0 && ans == 1)  
+  {  
+      return true;  
+  }  
+  else if (num % 2 == 1 && ans == 0)  
+  {  
+      return true;  
+  }  
+  else  
+  {  
+      return false;  
+  }  
+} 
+
+// 結果を表示する
+void showResult(bool result)
+{
+if (result)
+{
+	printf("当たり\n");
+}
+else
+{
+	printf("違う\n");
+}
+}
+
+void setTimeout(PFunc func, bool result)
+{
+    Sleep(3 * 1000);
+    func(result);
+}
+
+int main()  
+{  
+   PFunc pShow = showResult;
+
+  while (1)  
+  {  
+      // サイコロを振る  
+      int num = random();  
+      printf("サイコロの目は奇数か偶数か当ててください.\n 0:奇数 1:偶数\n");  
+      int ans;  
+      scanf_s("%d", &ans);  
+   bool result = check(num, ans);
+   setTimeout(pShow, result);
+   printf("サイコロの目は%dです.\n", num);
+
+
+  }  
+
+  return 0;  
 }
