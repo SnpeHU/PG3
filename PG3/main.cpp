@@ -3,60 +3,38 @@
 #include <windows.h>  
 #include <functional>  
 
-class Enemy  
-{  
-public:  
-	Enemy() = default;  
-	~Enemy() = default;  
+template<typename T1, typename T2 = T1>
+class Compare {
+public:
+	Compare(T1 a, T2 b) : a(a), b(b) {};
 
-void Update()
-{
-	(this->*phaseTable[phase])();
-	phase++; // フェーズを進める
-	if (phase >= phaseCount) // フェーズが終わったら
+	auto Min()
 	{
-		phase = 0; // フェーズをリセット
+		return a < b ? a : b;
 	}
-}
-
-//接近フェーズ
-	void ApproachPhase()
-	{
-		printf("接近!\n");
-	}
-//射撃フェーズ
-	void ShootPhase()  
-	{  
-		printf("射撃!\n");  
-	}  
-
-//撤退フェーズ
-	void RetreatPhase()
-	{
-		printf("撤退!\n");
-	}
-
 private:
-	int phase = 0; // 現在のフェーズインデックス
-	static const int phaseCount; // フェーズの数
-	static void (Enemy::* phaseTable[])();  
-};  
-
-void (Enemy::* Enemy::phaseTable[])() = {  
-&Enemy::ApproachPhase,
-&Enemy::ShootPhase,
-&Enemy::RetreatPhase
-};  
-
-const int Enemy::phaseCount = sizeof(Enemy::phaseTable) / sizeof(Enemy::phaseTable[0]); // フェーズの数を計算
+	T1 a;
+	T2 b;
+};
 
 int main()  
 {  
-	Enemy enemy;
-	while (true)
-	{
-		enemy.Update(); // 敵の状態を更新
-		Sleep(2000); // 2秒待機
-	}
+	Compare<int> c(10, 20);
+	Compare<float> c2(10.5f, 20.5f);
+	Compare<double> c3(6.5, 8.5);
+	Compare<int, float> c4(10, 20.5f);
+	Compare<int, double> c5(25, 20.5);
+	Compare<float, double> c6(10.5f, 20.0);
+
+
+
+
+	printf("小さいの数字は %d\n", c.Min());
+	printf("小さいの数字は %f\n", c2.Min());
+	printf("小さいの数字は %lf\n", c3.Min());
+	printf("小さいの数字は %f\n", c4.Min());
+	printf("小さいの数字は %lf\n", c5.Min());
+	printf("小さいの数字は %f\n", c6.Min());
+
 return 0;  
 }
