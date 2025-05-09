@@ -1,64 +1,81 @@
 #include <stdio.h>  
-#include <stdlib.h>  
-#include <windows.h>  
+
 
 /// <summary>
-/// 武器の基底クラス
+/// Shapeの基底クラス
 /// </summary>
-class Weapon
+class IShape
 {
 public:
-	Weapon() = default;
-	virtual ~Weapon() = default;
-	virtual void Attack() = 0;
+	IShape() = default;
+	virtual ~IShape() = default;
+	virtual float Size() = 0;
+	virtual void Draw() = 0;
 protected:
+	float width = 0;
+	float height = 0;
+	float size = 0;
+};
+/// <summary>
+/// 矩形
+/// </summary>
+class Rectangle : public IShape
+{
+public:
+	Rectangle(float width, float height)
+	{
+		this->width = width;
+		this->height = height;
+	}
+	~Rectangle() = default;
+	float Size() override
+	{
+		return width * height;
+	}
+	void Draw() override
+	{
+		printf("Rectangle Draw\n");
+	}
 };
 
 /// <summary>
-/// 銃
+/// 円形
 /// </summary>
-class Gun : public Weapon
+class Circle : public IShape
 {
 public:
-	Gun() = default;
-	~Gun() = default;
-	void Attack() override;
+	Circle(float size)
+	{
+		this->width = size;
+	}
+	~Circle() = default;
+	float Size() override
+	{
+		return 3.14f * width * width;
+	}
+	void Draw() override
+	{
+		printf("Circle Draw\n");
+	}
 };
 
-void Gun::Attack()
-{
-	printf("弾を発射！\n");
-}
 
-/// <summary>
-/// 剣
-/// </summary>
-class Sword : public Weapon
-{
-public:
-	Sword() = default;
-	~Sword() = default;
-	void Attack() override;
-};
-void Sword::Attack()
-{
-	printf("斬撃！\n");
-}
 
 int main()  
 {  
-	Weapon* weapons[2];
-	weapons[0] = new Gun();
-	weapons[1] = new Sword();
+	IShape* shape[2];
+	shape[0] = new Circle(10);
+	shape[1] = new Rectangle(10, 20);
 
 	for (int i = 0; i < 2; i++)
 	{
-		weapons[i]->Attack();
+		shape[i]->Draw();
+		printf("Size: %f\n", shape[i]->Size());
 	}
 
 	for (int i = 0; i < 2; i++)
 	{
-		delete weapons[i];
+		delete shape[i];
 	}
 return 0;  
 }
