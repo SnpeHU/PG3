@@ -1,82 +1,57 @@
 #include <stdio.h>  
-
-
-/// <summary>
-/// Shapeの基底クラス
-/// </summary>
-class IShape
-{
-public:
-	IShape() = default;
-	virtual ~IShape() = default;
-	virtual float Size() = 0;
-	virtual void Draw() = 0;
-protected:
-	float width = 0;
-	float height = 0;
-	float size = 0;
-};
-/// <summary>
-/// 矩形
-/// </summary>
-class Rectangle : public IShape
-{
-public:
-	Rectangle(float width, float height)
-	{
-		this->width = width;
-		this->height = height;
-	}
-	~Rectangle() = default;
-	float Size() override
-	{
-		return width * height;
-	}
-	void Draw() override
-	{
-		printf("Rectangle Draw\n");
-	}
-};
-
-/// <summary>
-/// 円形
-/// </summary>
-class Circle : public IShape
-{
-public:
-	Circle(float size)
-	{
-		this->width = size;
-	}
-	~Circle() = default;
-	float Size() override
-	{
-		return 3.14f * width * width;
-	}
-	void Draw() override
-	{
-		printf("Circle Draw\n");
-	}
-};
-
+#include <list>
 
 
 int main()  
 {  
-	IShape* shape[2];
-	shape[0] = new Circle(10);
-	shape[1] = new Rectangle(10, 20);
+	std::list<const char*> jrStations;
+	jrStations.push_back("Tokyo");
+	jrStations.push_back("Kanda");
+	jrStations.push_back("Akihabara");
+	jrStations.push_back("Okachimachi");
+	jrStations.push_back("Ueno");
+	jrStations.push_back("Uguisudani");
+	jrStations.push_back("Nippori");
+	//jrStations.push_back("Nishi-Nippori");
+	jrStations.push_back("Tabata");
+	jrStations.push_back("Komagome");
+	jrStations.push_back("Sugamo");
+	jrStations.push_back("Otsuka");
+	jrStations.push_back("Ikebukuro");
+	jrStations.push_back("Mejiro");
+	jrStations.push_back("Takadanobaba");
+	jrStations.push_back("Shin-Okubo");
+	jrStations.push_back("Shinjuku");
+	jrStations.push_back("Yoyogi");
+	jrStations.push_back("Harajuku");
+	jrStations.push_back("Shibuya");
+	jrStations.push_back("Ebisu");
+	jrStations.push_back("Meguro");
+	jrStations.push_back("Gotanda");
+	jrStations.push_back("Osaki");
+	jrStations.push_back("Shinagawa");
+	//jrStations.push_back("Takanawa-Gateway");
+	jrStations.push_back("Tamachi");
+	jrStations.push_back("Hamamatsucho");
+	jrStations.push_back("Shimbashi");
+	jrStations.push_back("Yurakucho");
 
-	for (int i = 0; i < 2; i++)
-	{
-		shape[i]->Draw();
-		printf("Size: %f\n", shape[i]->Size());
+	for (std::list<const char*>::iterator it = jrStations.begin(); it != jrStations.end(); ++it) {
+		if (strcmp(*it, "Tabata") == 0) {
+			jrStations.insert(it, "Nishi-Nippori");
+			++it;
+		}
+		if (strcmp(*it, "Tamachi") == 0) {
+			jrStations.insert(it, "Takanawa-Gateway");
+			++it;
+		}
+	}
+	
+	std::list<const char*>::iterator it;
+	for (it = jrStations.begin(); it != jrStations.end(); ++it) {
+		printf("%s\n", *it);
 	}
 
-	for (int i = 0; i < 2; i++)
-	{
-		delete shape[i];
-	}
 return 0;  
 }
 
