@@ -2,12 +2,19 @@
 #include <stdlib.h>  
 #include <windows.h>  
 #include <functional>  
-
+/// <summary>
+/// 数字を比較するためのテンプレートクラス
+/// </summary>
+/// <typeparam name="T1">タイプ1</typeparam>
+/// <typeparam name="T2">タイプ2</typeparam>
 template<typename T1, typename T2 = T1>
 class Compare {
 public:
 	Compare(T1 a, T2 b) : a(a), b(b) {};
 
+	/// <summary>
+	/// 小さい数字を返す
+	/// </summary>
 	auto Min()
 	{
 		return a < b ? a : b;
@@ -25,9 +32,6 @@ int main()
 	Compare<int, float> c4(10, 20.5f);
 	Compare<int, double> c5(25, 20.5);
 	Compare<float, double> c6(10.5f, 20.0);
-
-
-
 
 	printf("小さいの数字は %d\n", c.Min());
 	printf("小さいの数字は %f\n", c2.Min());
