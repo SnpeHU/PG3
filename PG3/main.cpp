@@ -1,9 +1,11 @@
 #include <stdio.h>  
 #include <list>
+#include <iostream>
 
 
-int main()  
-{  
+int main()
+{
+	// 1970年のJR駅のリストを作成
 	std::list<const char*> jrStations;
 	jrStations.push_back("Tokyo");
 	jrStations.push_back("Kanda");
@@ -36,22 +38,39 @@ int main()
 	jrStations.push_back("Shimbashi");
 	jrStations.push_back("Yurakucho");
 
-	for (std::list<const char*>::iterator it = jrStations.begin(); it != jrStations.end(); ++it) {
-		if (strcmp(*it, "Tabata") == 0) {
-			jrStations.insert(it, "Nishi-Nippori");
-			++it;
-		}
-		if (strcmp(*it, "Tamachi") == 0) {
-			jrStations.insert(it, "Takanawa-Gateway");
-			++it;
-		}
-	}
-	
+	std::cout << "1970 list of JR stations:\n";
 	std::list<const char*>::iterator it;
 	for (it = jrStations.begin(); it != jrStations.end(); ++it) {
 		printf("%s\n", *it);
 	}
 
-return 0;  
+	// Nishi-Nippori駅を挿入する
+	for (std::list<const char*>::iterator it = jrStations.begin(); it != jrStations.end(); ++it) {
+		if (strcmp(*it, "Tabata") == 0) {
+			jrStations.insert(it, "Nishi-Nippori");
+			++it;
+		}
+	}
+
+	std::cout << "\n2019 list of JR stations:\n";
+	for (it = jrStations.begin(); it != jrStations.end(); ++it) {
+		printf("%s\n", *it);
+	}
+
+	// Takanawa-Gateway駅を挿入する
+	for (std::list<const char*>::iterator it = jrStations.begin(); it != jrStations.end(); ++it) {
+		if (strcmp(*it, "Tamachi") == 0) {
+			jrStations.insert(it, "Takanawa-Gateway");
+			++it;
+		}
+	}
+
+
+	std::cout << "\n2022 list of JR stations:\n";
+	for (it = jrStations.begin(); it != jrStations.end(); ++it) {
+		printf("%s\n", *it);
+	}
+
+	return 0;
 }
 
